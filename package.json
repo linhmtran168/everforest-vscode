@@ -25,6 +25,7 @@
   "categories": [
     "Themes"
   ],
+  "packageManager": "pnpm@10.28.1",
   "extensionKind": [
     "ui",
     "workspace"

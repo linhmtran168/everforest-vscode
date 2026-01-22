@@ -2,9 +2,7 @@ BBLUE='\033[1;34m'
 NC='\033[0m' # No Color
 
 printf "${BBLUE}\n=> Regenerating /themes/*.json ...${NC}\n"
-npm run compile
+pnpm run compile
 git add themes
 
-npx lint-staged
-printf "${BBLUE}=> Formatting...${NC}\n\n"
-npx lint-staged
+pnpm lint-staged
