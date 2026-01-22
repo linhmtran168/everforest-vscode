@@ -2,16 +2,16 @@
   "name": "everforest",
   "displayName": "Everforest",
   "description": "Comfortable & Pleasant Color Scheme for Visual Studio Code",
-  "version": "0.3.0",
-  "publisher": "sainnhe",
-  "author": "sainnhe (https://github.com/sainnhe)",
-  "homepage": "https://github.com/sainnhe/everforest-vscode",
+  "version": "0.4.0",
+  "publisher": "linhmtran168",
+  "author": "linhmtran168 (https://github.com/linhmtran168)",
+  "homepage": "https://github.com/linhmtran168/everforest-vscode",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sainnhe/everforest-vscode.git"
+    "url": "https://github.com/linhmtran168/everforest-vscode.git"
   },
   "bugs": {
-    "url": "https://github.com/sainnhe/everforest-vscode/issues"
+    "url": "https://github.com/linhmtran168/everforest-vscode/issues"
   },
   "license": "MIT",
   "keywords": [
@@ -188,11 +188,11 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "npm run compile",
+    "vscode:prepublish": "pnpm run compile",
     "clean": "rimraf dist *.vsix",
     "compile:ts": "tsc",
     "compile:themes": "node dist/hook/generateThemes.js",
-    "compile": "npm run clean && npm run compile:ts && npm run compile:themes",
+    "compile": "pnpm run clean && pnpm run compile:ts && pnpm run compile:themes",
     "package": "vsce package && git checkout -- themes",
     "lint": "eslint src/",
     "browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
@@ -206,6 +206,7 @@
     "vscode": "^1.85.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.0.0",
     "@types/node": "^24.0.0",
     "@types/vscode": "1.85.0",
     "@typescript-eslint/eslint-plugin": "^8.0.0",
