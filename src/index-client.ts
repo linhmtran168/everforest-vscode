@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------
- *  Homepage:   https://github.com/sainnhe/everforest-vscode
+ *  Homepage:   https://github.com/linhmtran168/everforest-vscode
  *  Copyright:  2020 Sainnhe Park <i@sainnhe.dev>
  *  License:    MIT
  *--------------------------------------------------------------*/
@@ -17,7 +17,7 @@ export function activate() {
       utils.generate(
         join(__dirname, "..", "themes", "everforest-dark.json"),
         join(__dirname, "..", "themes", "everforest-light.json"),
-        utils.getThemeData(utils.getConfiguration())
+        utils.getThemeData(utils.getConfiguration()),
       );
     });
   });
@@ -30,7 +30,7 @@ export function activate() {
     utils.generate(
       join(__dirname, "..", "themes", "everforest-dark.json"),
       join(__dirname, "..", "themes", "everforest-light.json"),
-      utils.getThemeData(utils.getConfiguration())
+      utils.getThemeData(utils.getConfiguration()),
     );
   }
 }

@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
- *  Homepage:   https://github.com/sainnhe/everforest-vscode
+ *  Homepage:   https://github.com/linhmtran168/everforest-vscode
  *  Copyright:  2020 Sainnhe Park <i@sainnhe.dev>
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
@@ -16,7 +16,7 @@ import { default as lightBackgroundSoft } from "./light/background/soft";
 
 export function getPalette(
   configuration: Configuration,
-  variant: string
+  variant: string,
 ): Palette {
   let paletteBackground = darkBackgroundMedium;
   let paletteForeground = darkForeground;

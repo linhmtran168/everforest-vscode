@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------
- *  Homepage:   https://github.com/sainnhe/everforest-vscode
+ *  Homepage:   https://github.com/linhmtran168/everforest-vscode
  *  Copyright:  2020 Sainnhe Park <i@sainnhe.dev>
  *  License:    MIT
  *--------------------------------------------------------------*/
@@ -10,7 +10,7 @@ export function activate() {
   workspace.onDidChangeConfiguration((event) => {
     if (event.affectsConfiguration("everforest")) {
       window.showInformationMessage(
-        "Configuration options are currently not available in vscode web."
+        "Configuration options are currently not available in vscode web.",
       );
     }
   });

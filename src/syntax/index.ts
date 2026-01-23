@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
- *  Homepage:   https://github.com/sainnhe/everforest-vscode
+ *  Homepage:   https://github.com/linhmtran168/everforest-vscode
  *  Copyright:  2020 Sainnhe Park <i@sainnhe.dev>
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
@@ -11,11 +11,12 @@ import { getItalicSyntax } from "./italic";
 
 export function getSyntax(configuration: Configuration, variant: string) {
   const palette = getPalette(configuration, variant);
-  let syntax: any;
+  const italicComments = configuration.italicComments ?? true;
+  let syntax;
   if (configuration.italicKeywords === true) {
-    syntax = getItalicSyntax(palette, configuration.italicComments);
+    syntax = getItalicSyntax(palette, italicComments);
   } else {
-    syntax = getDefaultSyntax(palette, configuration.italicComments);
+    syntax = getDefaultSyntax(palette, italicComments);
   }
   return syntax;
 }

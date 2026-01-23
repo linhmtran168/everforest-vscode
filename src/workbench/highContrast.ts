@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------------------------
- *  Homepage:   https://github.com/sainnhe/everforest-vscode
+ *  Homepage:   https://github.com/linhmtran168/everforest-vscode
  *  Copyright:  2020 Sainnhe Park <i@sainnhe.dev>
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
@@ -9,7 +9,7 @@ import { Palette, Configuration } from "../interface";
 export function highContrastWorkbench(
   palette: Palette,
   configuration: Configuration,
-  variant: string
+  variant: string,
 ) {
   let selectionBg: string;
   let editorSelectionBg: string;

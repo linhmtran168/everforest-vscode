@@ -1,5 +1,5 @@
-> [!IMPORTANT]  
-> Since vscode is not my daily editor and lack of time, this repo is no longer maintained. Welcome to fork this repo and publish a new extension to marketplace.
+> [!NOTE]
+> This is a maintained fork of the original [Everforest VS Code theme](https://github.com/sainnhe/everforest-vscode) by sainnhe.
 
 ---
 
@@ -44,15 +44,15 @@
 ![light-soft-high-contrast](https://gitlab.com/sainnhe/img/-/raw/master/ef-vsc-light-soft-high-contrast.png)
 
 <p align="center">
-    <a href="https://marketplace.visualstudio.com/items?itemName=sainnhe.everforest" alt="Marketplace">
+    <a href="https://marketplace.visualstudio.com/items?itemName=linhmtran168.everforest" alt="Marketplace">
         <img src="https://img.shields.io/badge/vscode-marketplace-blue" /></a>
-    <a href="https://open-vsx.org/extension/sainnhe/everforest" alt="Registry">
+    <a href="https://open-vsx.org/extension/linhmtran168/everforest" alt="Registry">
         <img src="https://img.shields.io/badge/open--vsx-registry-green" /></a>
-    <a href="https://github.com/sainnhe/everforest-vscode" alt="Repository">
+    <a href="https://github.com/linhmtran168/everforest-vscode" alt="Repository">
         <img src="https://img.shields.io/badge/github-repository-blueviolet" /></a>
-    <a href="https://github.com/sainnhe/everforest-vscode/issues" alt="Issues">
+    <a href="https://github.com/linhmtran168/everforest-vscode/issues" alt="Issues">
         <img src="https://img.shields.io/badge/issue-feedback-red" /></a>
-    <a href="https://vscode.dev/theme/sainnhe.everforest" alt="Preview">
+    <a href="https://vscode.dev/theme/linhmtran168.everforest" alt="Preview">
         <img src="https://img.shields.io/badge/preview-vscode.dev-yellow" /></a>
 </p>
 
@@ -142,7 +142,7 @@ The following file types and syntax extensions are basically optimized, but ther
 ## Installation
 
 1. Press extensions icon in your editor.
-2. Search for `sainnhe.everforest`.
+2. Search for `linhmtran168.everforest`.
 3. Select this extension and press `install` button.
 
 ## Usage
@@ -192,4 +192,4 @@ See [CONTRIBUTING.md](https://github.com/sainnhe/gruvbox-material-vscode/blob/ma
 
 ## License
 
-[MIT License](https://github.com/sainnhe/everforest-vscode/blob/master/LICENSE)
+[MIT License](https://github.com/linhmtran168/everforest-vscode/blob/master/LICENSE)
