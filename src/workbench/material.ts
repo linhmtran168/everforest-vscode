@@ -4,7 +4,7 @@
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
 
-import { Palette, Configuration, ThemeVariant } from "../interface";
+import { Configuration, Palette, ThemeVariant } from "../interface";
 
 export function materialWorkbench(
   palette: Palette,
@@ -341,8 +341,8 @@ export function materialWorkbench(
     "tab.lastPinnedBorder": `${palette.badge}d0`,
     "editor.background": `${palette.bg}`,
     "editor.foreground": `${palette.fg}`,
-    "editorLineNumber.foreground": `${palette.grey0}a0`,
-    "editorLineNumber.activeForeground": `${palette.grey2}e0`,
+    "editorLineNumber.foreground": `${palette.grey0}c0`,
+    "editorLineNumber.activeForeground": `${palette.grey2}`,
     "editorCursor.foreground": `${cursorFg}`,
     "editor.selectionBackground": `${editorSelectionBg}`,
     "editor.selectionHighlightBackground": `${editorSelectionBgHl}`,
@@ -363,8 +363,8 @@ export function materialWorkbench(
     "editor.symbolHighlightBackground": `${palette.dimBlue}40`,
     "editorLink.activeForeground": `${palette.green}`,
     "editorWhitespace.foreground": `${palette.bg4}`,
-    "editorIndentGuide.background": `${palette.grey2}20`,
-    "editorIndentGuide.activeBackground": `${palette.grey2}50`,
+    "editorIndentGuide.background": `${palette.grey2}30`,
+    "editorIndentGuide.activeBackground": `${palette.grey2}60`,
     "editorInlayHint.background": `${palette.bg}00`,
     "editorInlayHint.foreground": `${palette.grey0}a0`,
     "editorInlayHint.typeBackground": `${palette.bg}00`,

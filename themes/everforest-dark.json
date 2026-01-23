@@ -133,8 +133,8 @@
     "tab.lastPinnedBorder": "#a7c080d0",
     "editor.background": "#2d353b",
     "editor.foreground": "#d5c9ae",
-    "editorLineNumber.foreground": "#87918aa0",
-    "editorLineNumber.activeForeground": "#9da9a0e0",
+    "editorLineNumber.foreground": "#87918ac0",
+    "editorLineNumber.activeForeground": "#9da9a0",
     "editorCursor.foreground": "#d5c9ae",
     "editor.selectionBackground": "#475258c0",
     "editor.selectionHighlightBackground": "#47525860",
@@ -151,8 +151,8 @@
     "editor.symbolHighlightBackground": "#5a93a240",
     "editorLink.activeForeground": "#a7c080",
     "editorWhitespace.foreground": "#475258",
-    "editorIndentGuide.background": "#9da9a020",
-    "editorIndentGuide.activeBackground": "#9da9a050",
+    "editorIndentGuide.background": "#9da9a030",
+    "editorIndentGuide.activeBackground": "#9da9a060",
     "editorInlayHint.background": "#2d353b00",
     "editorInlayHint.foreground": "#87918aa0",
     "editorInlayHint.typeBackground": "#2d353b00",
@@ -634,6 +634,65 @@
       "scope": "punctuation, meta.brace, meta.delimiter, meta.bracket",
       "settings": {
         "foreground": "#d5c9ae"
+      }
+    },
+    {
+      "name": "Documentation comment",
+      "scope": "comment.block.documentation, comment.block.javadoc, comment.block.jsdoc, string.quoted.docstring",
+      "settings": {
+        "foreground": "#9da9a0"
+      }
+    },
+    {
+      "name": "Documentation comment keyword",
+      "scope": "keyword.other.documentation, storage.type.class.jsdoc, entity.name.type.instance.jsdoc, variable.other.jsdoc, punctuation.definition.block.tag.jsdoc",
+      "settings": {
+        "foreground": "#83c092"
+      }
+    },
+    {
+      "name": "TODO/FIXME comment",
+      "scope": "keyword.codetag.notation, comment.line.todo, keyword.todo",
+      "settings": {
+        "foreground": "#d9c27f",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Deprecated",
+      "scope": "invalid.deprecated, entity.name.tag.deprecated",
+      "settings": {
+        "foreground": "#8d9890",
+        "fontStyle": "strikethrough"
+      }
+    },
+    {
+      "name": "Error/Invalid",
+      "scope": "invalid.illegal",
+      "settings": {
+        "foreground": "#e67e80",
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Diff inserted",
+      "scope": "markup.inserted, punctuation.definition.inserted",
+      "settings": {
+        "foreground": "#a7c080"
+      }
+    },
+    {
+      "name": "Diff deleted",
+      "scope": "markup.deleted, punctuation.definition.deleted",
+      "settings": {
+        "foreground": "#e67e80"
+      }
+    },
+    {
+      "name": "Diff changed",
+      "scope": "markup.changed, punctuation.definition.changed",
+      "settings": {
+        "foreground": "#d9c27f"
       }
     },
     {
