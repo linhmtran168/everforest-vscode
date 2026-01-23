@@ -14,25 +14,41 @@ export function activate() {
   // Regenerate theme files when user configuration changes.
   workspace.onDidChangeConfiguration((event) => {
     utils.detectConfigChanges(event, () => {
-      utils.generate(
-        join(__dirname, "..", "themes", "everforest-dark.json"),
-        join(__dirname, "..", "themes", "everforest-light.json"),
-        utils.getThemeData(utils.getConfiguration()),
-      );
+      utils
+        .generate(
+          join(__dirname, "..", "themes", "everforest-dark.json"),
+          join(__dirname, "..", "themes", "everforest-light.json"),
+          utils.getThemeData(utils.getConfiguration()),
+        )
+        .catch((error) => {
+          console.error("Failed to regenerate themes.", error);
+        });
     });
   });
 
   // Regenerate theme files if it's newly installed but the user settings are not the default.
-  if (
-    utils.isNewlyInstalled() &&
-    !utils.isDefaultConfiguration(utils.getConfiguration())
-  ) {
-    utils.generate(
-      join(__dirname, "..", "themes", "everforest-dark.json"),
-      join(__dirname, "..", "themes", "everforest-light.json"),
-      utils.getThemeData(utils.getConfiguration()),
-    );
-  }
+  utils
+    .isNewlyInstalled()
+    .then((isNewInstall) => {
+      if (!isNewInstall) {
+        return;
+      }
+      if (utils.isDefaultConfiguration(utils.getConfiguration())) {
+        return;
+      }
+      utils
+        .generate(
+          join(__dirname, "..", "themes", "everforest-dark.json"),
+          join(__dirname, "..", "themes", "everforest-light.json"),
+          utils.getThemeData(utils.getConfiguration()),
+        )
+        .catch((error) => {
+          console.error("Failed to regenerate themes.", error);
+        });
+    })
+    .catch((error) => {
+      console.error("Failed to check installation status.", error);
+    });
 }
 
 export function deactivate() {}

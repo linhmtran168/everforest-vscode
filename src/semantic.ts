@@ -4,10 +4,13 @@
  *  License:    MIT
  *--------------------------------------------------------------*/
 
-import { Configuration } from "./interface";
+import { Configuration, ThemeVariant } from "./interface";
 import { getPalette } from "./palette";
 
-export function getSemantic(configuration: Configuration, variant: string) {
+export function getSemantic(
+  configuration: Configuration,
+  variant: ThemeVariant,
+) {
   const palette = getPalette(configuration, variant);
   return {
     // General {{{

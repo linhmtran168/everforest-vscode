@@ -4,12 +4,12 @@
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
 
-import { Palette, Configuration } from "../interface";
+import { Palette, Configuration, ThemeVariant } from "../interface";
 
 export function materialWorkbench(
   palette: Palette,
   configuration: Configuration,
-  variant: string,
+  variant: ThemeVariant,
 ) {
   let selectionBg: string;
   let editorSelectionBg: string;

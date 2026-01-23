@@ -4,7 +4,7 @@
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
 
-import * as fs from "fs";
+import { promises as fs } from "fs";
 import { join } from "path";
 import { Configuration } from "../interface";
 import { getWorkbench } from "../workbench";
@@ -14,16 +14,18 @@ import { getSemantic } from "../semantic";
 class Utils {
   private async writeFile(path: string, data: unknown) {
     // {{{
-    return new Promise((resolve, reject) => {
-      fs.writeFile(path, JSON.stringify(data, null, 2), (err) =>
-        err ? reject(err) : resolve("Success"),
-      );
-    });
+    await fs.writeFile(path, JSON.stringify(data, null, 2));
   } // }}}
-  async generate(darkPath: string, lightPath: string, data: any) {
+  async generate(
+    darkPath: string,
+    lightPath: string,
+    data: { dark: unknown; light: unknown },
+  ) {
     // {{{
-    this.writeFile(darkPath, data.dark);
-    this.writeFile(lightPath, data.light);
+    await Promise.all([
+      this.writeFile(darkPath, data.dark),
+      this.writeFile(lightPath, data.light),
+    ]);
   } // }}}
   getThemeData(configuration: Configuration) {
     // {{{

@@ -4,21 +4,17 @@
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
 
-import { Configuration } from "../interface";
+import { Configuration, ThemeVariant } from "../interface";
 import { getPalette } from "../palette";
 import { getDefaultSyntax } from "./default";
 import { getItalicSyntax } from "./italic";
 
-export function getSyntax(configuration: Configuration, variant: string) {
+export function getSyntax(configuration: Configuration, variant: ThemeVariant) {
   const palette = getPalette(configuration, variant);
-  const italicComments = configuration.italicComments ?? true;
-  let syntax;
-  if (configuration.italicKeywords === true) {
-    syntax = getItalicSyntax(palette, italicComments);
-  } else {
-    syntax = getDefaultSyntax(palette, italicComments);
-  }
-  return syntax;
+  const italicComments = configuration.italicComments;
+  return configuration.italicKeywords
+    ? getItalicSyntax(palette, italicComments)
+    : getDefaultSyntax(palette, italicComments);
 }
 
 // vim: fdm=marker fmr={{{,}}}:

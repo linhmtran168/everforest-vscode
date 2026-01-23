@@ -4,13 +4,16 @@
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
 
-import { Configuration, Palette } from "../interface";
+import { Configuration, Palette, ThemeVariant } from "../interface";
 import { getPalette } from "../palette";
 import { flatWorkbench } from "./flat";
 import { highContrastWorkbench } from "./highContrast";
 import { materialWorkbench } from "./material";
 
-export function getWorkbench(configuration: Configuration, variant: string) {
+export function getWorkbench(
+  configuration: Configuration,
+  variant: ThemeVariant,
+) {
   const palette: Palette = getPalette(configuration, variant);
   if (variant === "dark") {
     switch (configuration.darkWorkbench) {

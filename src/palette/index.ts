@@ -4,7 +4,7 @@
  *  License:    MIT
  *--------------------------------------------------------------------------------------------*/
 
-import { Configuration, Palette } from "../interface";
+import { Configuration, Palette, ThemeVariant } from "../interface";
 import { default as darkForeground } from "./dark/foreground";
 import { default as darkBackgroundHard } from "./dark/background/hard";
 import { default as darkBackgroundMedium } from "./dark/background/medium";
@@ -16,7 +16,7 @@ import { default as lightBackgroundSoft } from "./light/background/soft";
 
 export function getPalette(
   configuration: Configuration,
-  variant: string,
+  variant: ThemeVariant,
 ): Palette {
   let paletteBackground = darkBackgroundMedium;
   let paletteForeground = darkForeground;

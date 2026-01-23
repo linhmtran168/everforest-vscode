@@ -5,10 +5,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 export default {
-  fg: "#d3c6aa",
+  fg: "#d5c9ae",
   red: "#e67e80",
-  orange: "#e69875",
-  yellow: "#dbbc7f",
+  orange: "#e39b7b",
+  yellow: "#d9c27f",
   green: "#a7c080",
   aqua: "#83c092",
   blue: "#7fbbb3",

@@ -4,7 +4,7 @@
  *  License:    MIT
  *--------------------------------------------------------------*/
 
-import * as fs from "fs";
+import { promises as fs } from "fs";
 import { join } from "path";
 import { ConfigurationChangeEvent, workspace, window, commands } from "vscode";
 import { Configuration } from "./interface";
@@ -26,20 +26,49 @@ export default class Utils {
     // {{{
     const workspaceConfiguration = workspace.getConfiguration("everforest");
     return {
-      darkContrast: workspaceConfiguration.get<string>("darkContrast"),
-      lightContrast: workspaceConfiguration.get<string>("lightContrast"),
-      darkWorkbench: workspaceConfiguration.get<string>("darkWorkbench"),
-      lightWorkbench: workspaceConfiguration.get<string>("lightWorkbench"),
-      darkSelection: workspaceConfiguration.get<string>("darkSelection"),
-      lightSelection: workspaceConfiguration.get<string>("lightSelection"),
-      darkCursor: workspaceConfiguration.get<string>("darkCursor"),
-      lightCursor: workspaceConfiguration.get<string>("lightCursor"),
-      italicKeywords: workspaceConfiguration.get<boolean>("italicKeywords"),
-      italicComments: workspaceConfiguration.get<boolean>("italicComments"),
-      diagnosticTextBackgroundOpacity: workspaceConfiguration.get<string>(
-        "diagnosticTextBackgroundOpacity",
+      darkContrast: workspaceConfiguration.get<Configuration["darkContrast"]>(
+        "darkContrast",
+        "medium",
       ),
-      highContrast: workspaceConfiguration.get<boolean>("highContrast"),
+      lightContrast: workspaceConfiguration.get<Configuration["lightContrast"]>(
+        "lightContrast",
+        "medium",
+      ),
+      darkWorkbench: workspaceConfiguration.get<Configuration["darkWorkbench"]>(
+        "darkWorkbench",
+        "material",
+      ),
+      lightWorkbench: workspaceConfiguration.get<
+        Configuration["lightWorkbench"]
+      >("lightWorkbench", "material"),
+      darkSelection: workspaceConfiguration.get<Configuration["darkSelection"]>(
+        "darkSelection",
+        "grey",
+      ),
+      lightSelection: workspaceConfiguration.get<
+        Configuration["lightSelection"]
+      >("lightSelection", "grey"),
+      darkCursor: workspaceConfiguration.get<Configuration["darkCursor"]>(
+        "darkCursor",
+        "white",
+      ),
+      lightCursor: workspaceConfiguration.get<Configuration["lightCursor"]>(
+        "lightCursor",
+        "black",
+      ),
+      italicKeywords: workspaceConfiguration.get<
+        Configuration["italicKeywords"]
+      >("italicKeywords", false),
+      italicComments: workspaceConfiguration.get<
+        Configuration["italicComments"]
+      >("italicComments", true),
+      diagnosticTextBackgroundOpacity: workspaceConfiguration.get<
+        Configuration["diagnosticTextBackgroundOpacity"]
+      >("diagnosticTextBackgroundOpacity", "0%"),
+      highContrast: workspaceConfiguration.get<Configuration["highContrast"]>(
+        "highContrast",
+        false,
+      ),
     };
   } // }}}
   isDefaultConfiguration(configuration: Configuration): boolean {
@@ -80,24 +109,38 @@ export default class Utils {
       },
     };
   } // }}}
-  isNewlyInstalled(): boolean {
+  async isNewlyInstalled(): Promise<boolean> {
     // {{{
     const flagPath = join(__dirname, "..", ".flag");
-    if (!fs.existsSync(flagPath)) {
-      this.writeFile(flagPath, "");
-      return true;
-    } else {
+    const exists = await this.hasFlagFile(flagPath);
+    if (exists) {
       return false;
     }
+    await this.writeFile(flagPath, "");
+    return true;
   } // }}}
   private async writeFile(path: string, data: unknown) {
     // {{{
-    return new Promise((resolve, reject) => {
-      fs.writeFile(path, JSON.stringify(data, null, 2), (err) =>
-        err ? reject(err) : resolve("Success"),
-      );
-    });
+    await fs.writeFile(path, JSON.stringify(data, null, 2));
   } // }}}
+  private async hasFlagFile(path: string): Promise<boolean> {
+    try {
+      await fs.access(path);
+      return true;
+    } catch (error) {
+      if (this.isNotFoundError(error)) {
+        return false;
+      }
+      throw error;
+    }
+  }
+  private isNotFoundError(error: unknown): error is NodeJS.ErrnoException {
+    return (
+      error instanceof Error &&
+      "code" in error &&
+      (error as NodeJS.ErrnoException).code === "ENOENT"
+    );
+  }
   private promptToReload() {
     // {{{
     const action = "Reload";
@@ -109,10 +152,17 @@ export default class Utils {
         }
       });
   } // }}}
-  async generate(darkPath: string, lightPath: string, data: any) {
+  async generate(
+    darkPath: string,
+    lightPath: string,
+    data: { dark: unknown; light: unknown },
+  ) {
     // {{{
-    this.writeFile(darkPath, data.dark).then(this.promptToReload);
-    this.writeFile(lightPath, data.light);
+    await Promise.all([
+      this.writeFile(darkPath, data.dark),
+      this.writeFile(lightPath, data.light),
+    ]);
+    this.promptToReload();
   } // }}}
 }
 
