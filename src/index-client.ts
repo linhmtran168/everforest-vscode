@@ -4,15 +4,15 @@
  *  License:    MIT
  *--------------------------------------------------------------*/
 
-import { workspace } from "vscode";
+import * as vscode from "vscode";
 import { join } from "path";
 import Utils from "./utils";
 
-export function activate() {
+export function activate(context: vscode.ExtensionContext) {
   const utils = new Utils();
 
   // Regenerate theme files when user configuration changes.
-  workspace.onDidChangeConfiguration((event) => {
+  const disposable = vscode.workspace.onDidChangeConfiguration((event) => {
     utils.detectConfigChanges(event, () => {
       utils
         .generate(
@@ -25,10 +25,11 @@ export function activate() {
         });
     });
   });
+  context.subscriptions.push(disposable);
 
   // Regenerate theme files if it's newly installed but the user settings are not the default.
   utils
-    .isNewlyInstalled()
+    .checkIfNewlyInstalled()
     .then((isNewInstall) => {
       if (!isNewInstall) {
         return;
@@ -42,6 +43,7 @@ export function activate() {
           join(__dirname, "..", "themes", "everforest-light.json"),
           utils.getThemeData(utils.getConfiguration()),
         )
+        .then(() => utils.markAsInstalled())
         .catch((error) => {
           console.error("Failed to regenerate themes.", error);
         });

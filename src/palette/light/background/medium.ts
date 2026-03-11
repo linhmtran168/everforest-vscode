@@ -5,16 +5,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 export default {
-  bg0: "#efebd4",
-  bg1: "#f4f0d9",
+  bg0: "#dad6c1",
+  bg1: "#f8f2dc",
   bg: "#fdf6e3",
-  bg2: "#f4f0d9",
-  bg3: "#efebd4",
+  bg2: "#f2eed6",
+  bg3: "#ece8d0",
   bg4: "#e6e2cc",
   bg5: "#e0dcc7",
-  grey0: "#9da696",
-  grey1: "#8a9687",
-  grey2: "#7e8d7c",
+  grey0: "#7a8878",
+  grey1: "#5e6e5c",
+  grey2: "#4d5d55",
   shadow: "#3c474d20",
 };
 

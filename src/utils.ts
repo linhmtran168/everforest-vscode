@@ -8,9 +8,7 @@ import { promises as fs } from "fs";
 import { join } from "path";
 import { ConfigurationChangeEvent, workspace, window, commands } from "vscode";
 import { Configuration } from "./interface";
-import { getWorkbench } from "./workbench";
-import { getSyntax } from "./syntax";
-import { getSemantic } from "./semantic";
+import { getThemeData, writeThemeFiles } from "./theme";
 
 export default class Utils {
   detectConfigChanges(
@@ -90,38 +88,18 @@ export default class Utils {
   } // }}}
   getThemeData(configuration: Configuration) {
     // {{{
-    return {
-      dark: {
-        name: "Everforest Dark",
-        type: "dark",
-        semanticHighlighting: true,
-        semanticTokenColors: getSemantic(configuration, "dark"),
-        colors: getWorkbench(configuration, "dark"),
-        tokenColors: getSyntax(configuration, "dark"),
-      },
-      light: {
-        name: "Everforest Light",
-        type: "light",
-        semanticHighlighting: true,
-        semanticTokenColors: getSemantic(configuration, "light"),
-        colors: getWorkbench(configuration, "light"),
-        tokenColors: getSyntax(configuration, "light"),
-      },
-    };
+    return getThemeData(configuration);
   } // }}}
-  async isNewlyInstalled(): Promise<boolean> {
+  async checkIfNewlyInstalled(): Promise<boolean> {
     // {{{
     const flagPath = join(__dirname, "..", ".flag");
     const exists = await this.hasFlagFile(flagPath);
-    if (exists) {
-      return false;
-    }
-    await this.writeFile(flagPath, "");
-    return true;
+    return !exists;
   } // }}}
-  private async writeFile(path: string, data: unknown) {
+  async markAsInstalled(): Promise<void> {
     // {{{
-    await fs.writeFile(path, JSON.stringify(data, null, 2));
+    const flagPath = join(__dirname, "..", ".flag");
+    await fs.writeFile(flagPath, JSON.stringify("", null, 2));
   } // }}}
   private async hasFlagFile(path: string): Promise<boolean> {
     try {
@@ -158,10 +136,7 @@ export default class Utils {
     data: { dark: unknown; light: unknown },
   ) {
     // {{{
-    await Promise.all([
-      this.writeFile(darkPath, data.dark),
-      this.writeFile(lightPath, data.light),
-    ]);
+    await writeThemeFiles(darkPath, lightPath, data);
     this.promptToReload();
   } // }}}
 }
