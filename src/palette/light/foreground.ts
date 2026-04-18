@@ -7,10 +7,10 @@
 export default {
   fg: "#4a5650",
   red: "#c0302e",
-  orange: "#b85c00",
+  orange: "#a35000",
   yellow: "#7d6000",
   green: "#5a7200",
-  aqua: "#1a7a58",
+  aqua: "#15704f",
   blue: "#1a6fa0",
   purple: "#8e3d7f",
   dimRed: "#d95050",

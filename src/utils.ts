@@ -7,8 +7,8 @@
 import { promises as fs } from "fs";
 import { join } from "path";
 import { ConfigurationChangeEvent, workspace, window, commands } from "vscode";
-import { Configuration } from "./interface";
-import { getThemeData, writeThemeFiles } from "./theme";
+import { UserConfiguration } from "./interface";
+import { writeAllThemes } from "./theme";
 
 export default class Utils {
   detectConfigChanges(
@@ -20,75 +20,50 @@ export default class Utils {
       onConfigChange();
     }
   } // }}}
-  getConfiguration(): Configuration {
+  getUserConfiguration(): UserConfiguration {
     // {{{
     const workspaceConfiguration = workspace.getConfiguration("everforest");
     return {
-      darkContrast: workspaceConfiguration.get<Configuration["darkContrast"]>(
-        "darkContrast",
-        "medium",
-      ),
-      lightContrast: workspaceConfiguration.get<Configuration["lightContrast"]>(
-        "lightContrast",
-        "medium",
-      ),
-      darkWorkbench: workspaceConfiguration.get<Configuration["darkWorkbench"]>(
-        "darkWorkbench",
-        "material",
-      ),
-      lightWorkbench: workspaceConfiguration.get<
-        Configuration["lightWorkbench"]
-      >("lightWorkbench", "material"),
-      darkSelection: workspaceConfiguration.get<Configuration["darkSelection"]>(
-        "darkSelection",
-        "grey",
-      ),
+      darkSelection: workspaceConfiguration.get<
+        UserConfiguration["darkSelection"]
+      >("darkSelection", "grey"),
       lightSelection: workspaceConfiguration.get<
-        Configuration["lightSelection"]
+        UserConfiguration["lightSelection"]
       >("lightSelection", "grey"),
-      darkCursor: workspaceConfiguration.get<Configuration["darkCursor"]>(
+      darkCursor: workspaceConfiguration.get<UserConfiguration["darkCursor"]>(
         "darkCursor",
         "white",
       ),
-      lightCursor: workspaceConfiguration.get<Configuration["lightCursor"]>(
+      lightCursor: workspaceConfiguration.get<UserConfiguration["lightCursor"]>(
         "lightCursor",
         "black",
       ),
       italicKeywords: workspaceConfiguration.get<
-        Configuration["italicKeywords"]
+        UserConfiguration["italicKeywords"]
       >("italicKeywords", false),
       italicComments: workspaceConfiguration.get<
-        Configuration["italicComments"]
+        UserConfiguration["italicComments"]
       >("italicComments", true),
       diagnosticTextBackgroundOpacity: workspaceConfiguration.get<
-        Configuration["diagnosticTextBackgroundOpacity"]
+        UserConfiguration["diagnosticTextBackgroundOpacity"]
       >("diagnosticTextBackgroundOpacity", "0%"),
-      highContrast: workspaceConfiguration.get<Configuration["highContrast"]>(
-        "highContrast",
-        false,
-      ),
+      highContrast: workspaceConfiguration.get<
+        UserConfiguration["highContrast"]
+      >("highContrast", false),
     };
   } // }}}
-  isDefaultConfiguration(configuration: Configuration): boolean {
+  isDefaultUserConfiguration(user: UserConfiguration): boolean {
     // {{{
     return (
-      configuration.italicKeywords === false &&
-      configuration.italicComments === true &&
-      configuration.lightWorkbench === "material" &&
-      configuration.darkWorkbench === "material" &&
-      configuration.lightContrast === "medium" &&
-      configuration.darkContrast === "medium" &&
-      configuration.darkCursor === "white" &&
-      configuration.lightCursor === "black" &&
-      configuration.darkSelection === "grey" &&
-      configuration.lightSelection === "grey" &&
-      configuration.diagnosticTextBackgroundOpacity === "0%" &&
-      configuration.highContrast === false
+      user.italicKeywords === false &&
+      user.italicComments === true &&
+      user.darkCursor === "white" &&
+      user.lightCursor === "black" &&
+      user.darkSelection === "grey" &&
+      user.lightSelection === "grey" &&
+      user.diagnosticTextBackgroundOpacity === "0%" &&
+      user.highContrast === false
     );
-  } // }}}
-  getThemeData(configuration: Configuration) {
-    // {{{
-    return getThemeData(configuration);
   } // }}}
   async checkIfNewlyInstalled(): Promise<boolean> {
     // {{{
@@ -130,13 +105,9 @@ export default class Utils {
         }
       });
   } // }}}
-  async generate(
-    darkPath: string,
-    lightPath: string,
-    data: { dark: unknown; light: unknown },
-  ) {
+  async generate(themesDir: string, user: UserConfiguration) {
     // {{{
-    await writeThemeFiles(darkPath, lightPath, data);
+    await writeAllThemes(themesDir, user);
     this.promptToReload();
   } // }}}
 }

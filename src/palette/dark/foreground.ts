@@ -11,7 +11,7 @@ export default {
   yellow: "#d9c27f",
   green: "#b0c880",
   aqua: "#83c092",
-  blue: "#72a8a8",
+  blue: "#8cb8d0",
   purple: "#d699b6",
   dimRed: "#d06060",
   dimOrange: "#d77f48",

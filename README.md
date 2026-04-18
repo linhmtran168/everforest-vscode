@@ -1,3 +1,6 @@
+> [!WARNING]
+> This project is AI-generated. Use at your own risk.
+
 > [!NOTE]
 > This is a maintained fork of the original [Everforest VS Code theme](https://github.com/sainnhe/everforest-vscode) by sainnhe.
 

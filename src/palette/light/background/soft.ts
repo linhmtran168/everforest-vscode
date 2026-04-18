@@ -12,7 +12,7 @@ export default {
   bg3: "#e1dbc3",
   bg4: "#ddd8be",
   bg5: "#d8d3ba",
-  grey0: "#7a8878",
+  grey0: "#6b786b",
   grey1: "#5e6e5c",
   grey2: "#4d5d55",
   shadow: "#3c474d20",

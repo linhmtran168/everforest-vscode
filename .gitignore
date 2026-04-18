@@ -10,3 +10,4 @@ dist/
 *.vsix
 .flag
 .vscode-test-web
+.claude/settings.local.json

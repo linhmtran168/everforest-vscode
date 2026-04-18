@@ -2,7 +2,7 @@
   "name": "everforest-lite",
   "displayName": "Everforest Lite",
   "description": "Comfortable & Pleasant Color Scheme for Visual Studio Code",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "publisher": "linhmtran168",
   "author": "linhmtran168 (https://github.com/linhmtran168)",
   "homepage": "https://github.com/linhmtran168/everforest-vscode",
@@ -25,7 +25,7 @@
   "categories": [
     "Themes"
   ],
-  "packageManager": "pnpm@10.28.1",
+  "packageManager": "pnpm@10.33.0",
   "extensionKind": [
     "ui"
   ],
@@ -43,59 +43,39 @@
   "contributes": {
     "themes": [
       {
-        "label": "Everforest Dark",
+        "label": "Everforest Dark Hard Flat",
         "uiTheme": "vs-dark",
-        "path": "./themes/everforest-dark.json"
+        "path": "./themes/everforest-dark-hard-flat.json"
       },
       {
-        "label": "Everforest Light",
+        "label": "Everforest Dark Medium Material",
+        "uiTheme": "vs-dark",
+        "path": "./themes/everforest-dark-medium-material.json"
+      },
+      {
+        "label": "Everforest Dark Soft High Contrast",
+        "uiTheme": "vs-dark",
+        "path": "./themes/everforest-dark-soft-high-contrast.json"
+      },
+      {
+        "label": "Everforest Light Hard Flat",
         "uiTheme": "vs",
-        "path": "./themes/everforest-light.json"
+        "path": "./themes/everforest-light-hard-flat.json"
+      },
+      {
+        "label": "Everforest Light Medium Material",
+        "uiTheme": "vs",
+        "path": "./themes/everforest-light-medium-material.json"
+      },
+      {
+        "label": "Everforest Light Soft High Contrast",
+        "uiTheme": "vs",
+        "path": "./themes/everforest-light-soft-high-contrast.json"
       }
     ],
     "configuration": {
       "title": "Everforest",
       "properties": {
-        "everforest.darkContrast": {
-          "type": "string",
-          "default": "medium",
-          "description": "Background contrast for the dark variant.",
-          "enum": [
-            "soft",
-            "medium",
-            "hard"
-          ]
-        },
-        "everforest.lightContrast": {
-          "type": "string",
-          "default": "medium",
-          "description": "Background contrast for the light variant.",
-          "enum": [
-            "soft",
-            "medium",
-            "hard"
-          ]
-        },
-        "everforest.darkWorkbench": {
-          "type": "string",
-          "default": "material",
-          "description": "Workbench style for the dark variant.",
-          "enum": [
-            "material",
-            "flat",
-            "high-contrast"
-          ]
-        },
-        "everforest.lightWorkbench": {
-          "type": "string",
-          "default": "material",
-          "description": "Workbench style for the light variant.",
-          "enum": [
-            "material",
-            "flat",
-            "high-contrast"
-          ]
-        },
         "everforest.darkCursor": {
           "type": "string",
           "default": "white",

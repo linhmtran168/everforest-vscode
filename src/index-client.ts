@@ -10,39 +10,29 @@ import Utils from "./utils";
 
 export function activate(context: vscode.ExtensionContext) {
   const utils = new Utils();
+  const themesDir = join(__dirname, "..", "themes");
 
-  // Regenerate theme files when user configuration changes.
   const disposable = vscode.workspace.onDidChangeConfiguration((event) => {
     utils.detectConfigChanges(event, () => {
-      utils
-        .generate(
-          join(__dirname, "..", "themes", "everforest-dark.json"),
-          join(__dirname, "..", "themes", "everforest-light.json"),
-          utils.getThemeData(utils.getConfiguration()),
-        )
-        .catch((error) => {
-          console.error("Failed to regenerate themes.", error);
-        });
+      utils.generate(themesDir, utils.getUserConfiguration()).catch((error) => {
+        console.error("Failed to regenerate themes.", error);
+      });
     });
   });
   context.subscriptions.push(disposable);
 
-  // Regenerate theme files if it's newly installed but the user settings are not the default.
   utils
     .checkIfNewlyInstalled()
     .then((isNewInstall) => {
       if (!isNewInstall) {
         return;
       }
-      if (utils.isDefaultConfiguration(utils.getConfiguration())) {
+      const user = utils.getUserConfiguration();
+      if (utils.isDefaultUserConfiguration(user)) {
         return;
       }
       utils
-        .generate(
-          join(__dirname, "..", "themes", "everforest-dark.json"),
-          join(__dirname, "..", "themes", "everforest-light.json"),
-          utils.getThemeData(utils.getConfiguration()),
-        )
+        .generate(themesDir, user)
         .then(() => utils.markAsInstalled())
         .catch((error) => {
           console.error("Failed to regenerate themes.", error);
