@@ -4,15 +4,16 @@
  *  License:    MIT
  *--------------------------------------------------------------*/
 
-// To add a new configuration option:
-// 1. Edit package.json
-// 2. Add the configuration option in this interface
-// 3. utils.getConfiguration()
-// 4. utils.isDefaultConfiguration()
-// 5. generateThemes.ts
+// To add a new user-facing configuration option:
+// 1. Edit package.json (contributes.configuration)
+// 2. Add the field to UserConfiguration below
+// 3. utils.getUserConfiguration()
+// 4. utils.isDefaultUserConfiguration()
+// 5. generateThemes.ts default
 export type ThemeVariant = "dark" | "light";
 export type Contrast = "soft" | "medium" | "hard";
 export type WorkbenchVariant = "material" | "flat" | "high-contrast";
+export type LightPalette = "pastel" | "strong";
 export type CursorColor =
   | "black"
   | "white"
@@ -38,11 +39,7 @@ export type DiagnosticTextBackgroundOpacity =
   | "25%"
   | "37.5%"
   | "50%";
-export interface Configuration {
-  darkContrast: Contrast;
-  lightContrast: Contrast;
-  darkWorkbench: WorkbenchVariant;
-  lightWorkbench: WorkbenchVariant;
+export interface UserConfiguration {
   darkSelection: SelectionColor;
   lightSelection: SelectionColor;
   darkCursor: CursorColor;
@@ -51,7 +48,33 @@ export interface Configuration {
   italicComments: boolean;
   diagnosticTextBackgroundOpacity: DiagnosticTextBackgroundOpacity;
   highContrast: boolean;
+  darkContrast: Contrast;
+  lightContrast: Contrast;
+  darkWorkbench: WorkbenchVariant;
+  lightWorkbench: WorkbenchVariant;
+  lightPalette: LightPalette;
 }
+
+export type Configuration = UserConfiguration;
+
+export interface ThemeSpec {
+  variant: ThemeVariant;
+  name: string;
+  fileName: string;
+}
+
+export const THEME_VARIANTS: readonly ThemeSpec[] = [
+  {
+    variant: "dark",
+    name: "Everforest Dark",
+    fileName: "everforest-dark.json",
+  },
+  {
+    variant: "light",
+    name: "Everforest Light",
+    fileName: "everforest-light.json",
+  },
+];
 
 export interface Palette {
   bg0: string;

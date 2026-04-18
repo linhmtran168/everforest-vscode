@@ -33,7 +33,7 @@ The theme generation pipeline flows through three layers, each parameterized by 
 - `src/index-web.ts` — VS Code web extension entry (no-op, web doesn't support runtime theme regeneration).
 - `src/hook/generateThemes.ts` — Build-time script run by `compile:themes`. Generates theme JSON with default configuration.
 
-**Configuration flow:** All user settings are defined in `package.json` under `contributes.configuration` and typed in `src/interface.ts`. The `Configuration` interface is the central type — when adding a new option, follow the checklist in `src/interface.ts`.
+**Configuration flow:** User-facing settings are defined in `package.json` under `contributes.configuration` and typed as `UserConfiguration` in `src/interface.ts`. Contrast and workbench style are NOT user settings — they are fixed per published theme variant (see `THEME_VARIANTS` in `src/interface.ts`, which lists the 6 shipped combinations). At build/runtime, `buildConfiguration(user, spec)` merges user settings with a variant's fixed contrast/workbench into the internal `Configuration` passed to palette/workbench/syntax. When adding a new user-facing option, follow the checklist in `src/interface.ts`.
 
 ## Key Conventions
 

@@ -9,3 +9,7 @@ dist/hook
 .eslintrc.js
 .eslintignore
 .vscode-test-web
+.claude/
+CLAUDE.md
+eslint.config.mjs
+.node-version

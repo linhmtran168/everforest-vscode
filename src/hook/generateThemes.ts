@@ -5,15 +5,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { join } from "path";
-import { Configuration } from "../interface";
-import { getThemeData, writeThemeFiles } from "../theme";
+import { UserConfiguration } from "../interface";
+import { writeAllThemes } from "../theme";
 
 (async () => {
-  const configuration: Configuration = {
-    darkContrast: "medium",
-    lightContrast: "medium",
-    darkWorkbench: "material",
-    lightWorkbench: "material",
+  const user: UserConfiguration = {
     darkSelection: "grey",
     lightSelection: "grey",
     darkCursor: "white",
@@ -22,13 +18,14 @@ import { getThemeData, writeThemeFiles } from "../theme";
     italicComments: true,
     diagnosticTextBackgroundOpacity: "0%",
     highContrast: false,
+    darkContrast: "medium",
+    lightContrast: "medium",
+    darkWorkbench: "material",
+    lightWorkbench: "material",
+    lightPalette: "pastel",
   };
 
-  await writeThemeFiles(
-    join(__dirname, "..", "..", "themes", "everforest-dark.json"),
-    join(__dirname, "..", "..", "themes", "everforest-light.json"),
-    getThemeData(configuration),
-  );
+  await writeAllThemes(join(__dirname, "..", "..", "themes"), user);
 })().catch((error) => {
   console.error("Failed to generate themes:", error);
   process.exit(1);
