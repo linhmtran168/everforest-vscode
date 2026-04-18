@@ -6,38 +6,19 @@
 
 import { promises as fs } from "fs";
 import { join } from "path";
-import {
-  Configuration,
-  ThemeSpec,
-  THEME_VARIANTS,
-  UserConfiguration,
-} from "./interface";
+import { ThemeSpec, THEME_VARIANTS, UserConfiguration } from "./interface";
 import { getWorkbench } from "./workbench";
 import { getSyntax } from "./syntax";
 import { getSemantic } from "./semantic";
 
-function buildConfiguration(
-  user: UserConfiguration,
-  spec: ThemeSpec,
-): Configuration {
-  return {
-    ...user,
-    darkContrast: spec.variant === "dark" ? spec.contrast : "medium",
-    lightContrast: spec.variant === "light" ? spec.contrast : "medium",
-    darkWorkbench: spec.variant === "dark" ? spec.workbench : "material",
-    lightWorkbench: spec.variant === "light" ? spec.workbench : "material",
-  };
-}
-
 export function buildTheme(user: UserConfiguration, spec: ThemeSpec) {
-  const configuration = buildConfiguration(user, spec);
   return {
     name: spec.name,
     type: spec.variant,
     semanticHighlighting: true,
-    semanticTokenColors: getSemantic(configuration, spec.variant),
-    colors: getWorkbench(configuration, spec.variant),
-    tokenColors: getSyntax(configuration, spec.variant),
+    semanticTokenColors: getSemantic(user, spec.variant),
+    colors: getWorkbench(user, spec.variant),
+    tokenColors: getSyntax(user, spec.variant),
   };
 }
 

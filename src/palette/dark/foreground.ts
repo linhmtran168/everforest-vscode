@@ -6,12 +6,12 @@
 
 export default {
   fg: "#d5c9ae",
-  red: "#e88585",
+  red: "#e67e80",
   orange: "#e39b7b",
   yellow: "#d9c27f",
-  green: "#b0c880",
+  green: "#a7c080",
   aqua: "#83c092",
-  blue: "#8cb8d0",
+  blue: "#7fbbb3",
   purple: "#d699b6",
   dimRed: "#d06060",
   dimOrange: "#d77f48",

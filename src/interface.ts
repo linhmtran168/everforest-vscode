@@ -13,6 +13,7 @@
 export type ThemeVariant = "dark" | "light";
 export type Contrast = "soft" | "medium" | "hard";
 export type WorkbenchVariant = "material" | "flat" | "high-contrast";
+export type LightPalette = "pastel" | "strong";
 export type CursorColor =
   | "black"
   | "white"
@@ -47,19 +48,17 @@ export interface UserConfiguration {
   italicComments: boolean;
   diagnosticTextBackgroundOpacity: DiagnosticTextBackgroundOpacity;
   highContrast: boolean;
-}
-
-export interface Configuration extends UserConfiguration {
   darkContrast: Contrast;
   lightContrast: Contrast;
   darkWorkbench: WorkbenchVariant;
   lightWorkbench: WorkbenchVariant;
+  lightPalette: LightPalette;
 }
+
+export type Configuration = UserConfiguration;
 
 export interface ThemeSpec {
   variant: ThemeVariant;
-  contrast: Contrast;
-  workbench: WorkbenchVariant;
   name: string;
   fileName: string;
 }
@@ -67,45 +66,13 @@ export interface ThemeSpec {
 export const THEME_VARIANTS: readonly ThemeSpec[] = [
   {
     variant: "dark",
-    contrast: "hard",
-    workbench: "flat",
-    name: "Everforest Dark Hard Flat",
-    fileName: "everforest-dark-hard-flat.json",
-  },
-  {
-    variant: "dark",
-    contrast: "medium",
-    workbench: "material",
-    name: "Everforest Dark Medium Material",
-    fileName: "everforest-dark-medium-material.json",
-  },
-  {
-    variant: "dark",
-    contrast: "soft",
-    workbench: "high-contrast",
-    name: "Everforest Dark Soft High Contrast",
-    fileName: "everforest-dark-soft-high-contrast.json",
+    name: "Everforest Dark",
+    fileName: "everforest-dark.json",
   },
   {
     variant: "light",
-    contrast: "hard",
-    workbench: "flat",
-    name: "Everforest Light Hard Flat",
-    fileName: "everforest-light-hard-flat.json",
-  },
-  {
-    variant: "light",
-    contrast: "medium",
-    workbench: "material",
-    name: "Everforest Light Medium Material",
-    fileName: "everforest-light-medium-material.json",
-  },
-  {
-    variant: "light",
-    contrast: "soft",
-    workbench: "high-contrast",
-    name: "Everforest Light Soft High Contrast",
-    fileName: "everforest-light-soft-high-contrast.json",
+    name: "Everforest Light",
+    fileName: "everforest-light.json",
   },
 ];
 

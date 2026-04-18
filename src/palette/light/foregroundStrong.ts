@@ -8,7 +8,7 @@ export default {
   fg: "#4a5650",
   red: "#c0302e",
   orange: "#a35000",
-  yellow: "#7d6000",
+  yellow: "#8a5500",
   green: "#5a7200",
   aqua: "#15704f",
   blue: "#1a6fa0",

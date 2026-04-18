@@ -50,6 +50,21 @@ export default class Utils {
       highContrast: workspaceConfiguration.get<
         UserConfiguration["highContrast"]
       >("highContrast", false),
+      darkContrast: workspaceConfiguration.get<
+        UserConfiguration["darkContrast"]
+      >("darkContrast", "medium"),
+      lightContrast: workspaceConfiguration.get<
+        UserConfiguration["lightContrast"]
+      >("lightContrast", "medium"),
+      darkWorkbench: workspaceConfiguration.get<
+        UserConfiguration["darkWorkbench"]
+      >("darkWorkbench", "material"),
+      lightWorkbench: workspaceConfiguration.get<
+        UserConfiguration["lightWorkbench"]
+      >("lightWorkbench", "material"),
+      lightPalette: workspaceConfiguration.get<
+        UserConfiguration["lightPalette"]
+      >("lightPalette", "pastel"),
     };
   } // }}}
   isDefaultUserConfiguration(user: UserConfiguration): boolean {
@@ -62,7 +77,12 @@ export default class Utils {
       user.darkSelection === "grey" &&
       user.lightSelection === "grey" &&
       user.diagnosticTextBackgroundOpacity === "0%" &&
-      user.highContrast === false
+      user.highContrast === false &&
+      user.darkContrast === "medium" &&
+      user.lightContrast === "medium" &&
+      user.darkWorkbench === "material" &&
+      user.lightWorkbench === "material" &&
+      user.lightPalette === "pastel"
     );
   } // }}}
   async checkIfNewlyInstalled(): Promise<boolean> {

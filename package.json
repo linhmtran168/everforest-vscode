@@ -2,7 +2,7 @@
   "name": "everforest-lite",
   "displayName": "Everforest Lite",
   "description": "Comfortable & Pleasant Color Scheme for Visual Studio Code",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "publisher": "linhmtran168",
   "author": "linhmtran168 (https://github.com/linhmtran168)",
   "homepage": "https://github.com/linhmtran168/everforest-vscode",
@@ -43,34 +43,14 @@
   "contributes": {
     "themes": [
       {
-        "label": "Everforest Dark Hard Flat",
+        "label": "Everforest Dark",
         "uiTheme": "vs-dark",
-        "path": "./themes/everforest-dark-hard-flat.json"
+        "path": "./themes/everforest-dark.json"
       },
       {
-        "label": "Everforest Dark Medium Material",
-        "uiTheme": "vs-dark",
-        "path": "./themes/everforest-dark-medium-material.json"
-      },
-      {
-        "label": "Everforest Dark Soft High Contrast",
-        "uiTheme": "vs-dark",
-        "path": "./themes/everforest-dark-soft-high-contrast.json"
-      },
-      {
-        "label": "Everforest Light Hard Flat",
+        "label": "Everforest Light",
         "uiTheme": "vs",
-        "path": "./themes/everforest-light-hard-flat.json"
-      },
-      {
-        "label": "Everforest Light Medium Material",
-        "uiTheme": "vs",
-        "path": "./themes/everforest-light-medium-material.json"
-      },
-      {
-        "label": "Everforest Light Soft High Contrast",
-        "uiTheme": "vs",
-        "path": "./themes/everforest-light-soft-high-contrast.json"
+        "path": "./themes/everforest-light.json"
       }
     ],
     "configuration": {
@@ -162,6 +142,55 @@
           "type": "boolean",
           "default": false,
           "description": "Whether to add an additional border around items across the UI to increase the contrast."
+        },
+        "everforest.darkContrast": {
+          "type": "string",
+          "default": "medium",
+          "description": "Background contrast level for the dark theme.",
+          "enum": [
+            "soft",
+            "medium",
+            "hard"
+          ]
+        },
+        "everforest.lightContrast": {
+          "type": "string",
+          "default": "medium",
+          "description": "Background contrast level for the light theme.",
+          "enum": [
+            "soft",
+            "medium",
+            "hard"
+          ]
+        },
+        "everforest.darkWorkbench": {
+          "type": "string",
+          "default": "material",
+          "description": "Workbench style for the dark theme.",
+          "enum": [
+            "material",
+            "flat",
+            "high-contrast"
+          ]
+        },
+        "everforest.lightWorkbench": {
+          "type": "string",
+          "default": "material",
+          "description": "Workbench style for the light theme.",
+          "enum": [
+            "material",
+            "flat",
+            "high-contrast"
+          ]
+        },
+        "everforest.lightPalette": {
+          "type": "string",
+          "default": "pastel",
+          "markdownDescription": "Foreground palette for the light theme. `pastel` is the soft official Everforest palette (evening / ambient light). `strong` is a darker/saturated variant (bright daylight).",
+          "enum": [
+            "pastel",
+            "strong"
+          ]
         }
       }
     }
@@ -185,22 +214,22 @@
     "vscode": "^1.85.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.0.0",
-    "@types/node": "^24.0.0",
+    "@eslint/js": "^9.39.4",
+    "@types/node": "^24.12.2",
     "@types/vscode": "1.85.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
     "@vscode/test-web": "^0.0.78",
-    "@vscode/vsce": "^3.0.0",
-    "eslint": "^9.0.0",
-    "eslint-config-prettier": "^10.0.0",
-    "eslint-plugin-prettier": "^5.0.0",
-    "globals": "^16.0.0",
-    "husky": "^9.0.0",
-    "lint-staged": "^16.0.0",
-    "prettier": "^3.0.0",
-    "rimraf": "^6.0.0",
-    "typescript": "^5.0.0",
-    "typescript-eslint": "^8.0.0"
+    "@vscode/vsce": "^3.9.1",
+    "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "globals": "^16.5.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "prettier": "^3.8.3",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.58.2"
   }
 }

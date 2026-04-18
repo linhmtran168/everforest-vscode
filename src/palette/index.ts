@@ -9,7 +9,8 @@ import { default as darkForeground } from "./dark/foreground";
 import { default as darkBackgroundHard } from "./dark/background/hard";
 import { default as darkBackgroundMedium } from "./dark/background/medium";
 import { default as darkBackgroundSoft } from "./dark/background/soft";
-import { default as lightForeground } from "./light/foreground";
+import { default as lightForegroundPastel } from "./light/foregroundPastel";
+import { default as lightForegroundStrong } from "./light/foregroundStrong";
 import { default as lightBackgroundHard } from "./light/background/hard";
 import { default as lightBackgroundMedium } from "./light/background/medium";
 import { default as lightBackgroundSoft } from "./light/background/soft";
@@ -42,7 +43,10 @@ export function getPalette(
       }
     } // }}}
   } else {
-    paletteForeground = lightForeground;
+    paletteForeground =
+      configuration.lightPalette === "strong"
+        ? lightForegroundStrong
+        : lightForegroundPastel;
     switch (
       configuration.lightContrast // {{{
     ) {

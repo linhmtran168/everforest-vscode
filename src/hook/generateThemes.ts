@@ -18,6 +18,11 @@ import { writeAllThemes } from "../theme";
     italicComments: true,
     diagnosticTextBackgroundOpacity: "0%",
     highContrast: false,
+    darkContrast: "medium",
+    lightContrast: "medium",
+    darkWorkbench: "material",
+    lightWorkbench: "material",
+    lightPalette: "pastel",
   };
 
   await writeAllThemes(join(__dirname, "..", "..", "themes"), user);
