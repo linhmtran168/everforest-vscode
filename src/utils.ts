@@ -4,13 +4,11 @@
  *  License:    MIT
  *--------------------------------------------------------------*/
 
-import * as fs from "fs";
+import { promises as fs } from "fs";
 import { join } from "path";
 import { ConfigurationChangeEvent, workspace, window, commands } from "vscode";
 import { Configuration } from "./interface";
-import { getWorkbench } from "./workbench";
-import { getSyntax } from "./syntax";
-import { getSemantic } from "./semantic";
+import { getThemeData, writeThemeFiles } from "./theme";
 
 export default class Utils {
   detectConfigChanges(
@@ -26,20 +24,49 @@ export default class Utils {
     // {{{
     const workspaceConfiguration = workspace.getConfiguration("everforest");
     return {
-      darkContrast: workspaceConfiguration.get<string>("darkContrast"),
-      lightContrast: workspaceConfiguration.get<string>("lightContrast"),
-      darkWorkbench: workspaceConfiguration.get<string>("darkWorkbench"),
-      lightWorkbench: workspaceConfiguration.get<string>("lightWorkbench"),
-      darkSelection: workspaceConfiguration.get<string>("darkSelection"),
-      lightSelection: workspaceConfiguration.get<string>("lightSelection"),
-      darkCursor: workspaceConfiguration.get<string>("darkCursor"),
-      lightCursor: workspaceConfiguration.get<string>("lightCursor"),
-      italicKeywords: workspaceConfiguration.get<boolean>("italicKeywords"),
-      italicComments: workspaceConfiguration.get<boolean>("italicComments"),
-      diagnosticTextBackgroundOpacity: workspaceConfiguration.get<string>(
-        "diagnosticTextBackgroundOpacity",
+      darkContrast: workspaceConfiguration.get<Configuration["darkContrast"]>(
+        "darkContrast",
+        "medium",
       ),
-      highContrast: workspaceConfiguration.get<boolean>("highContrast"),
+      lightContrast: workspaceConfiguration.get<Configuration["lightContrast"]>(
+        "lightContrast",
+        "medium",
+      ),
+      darkWorkbench: workspaceConfiguration.get<Configuration["darkWorkbench"]>(
+        "darkWorkbench",
+        "material",
+      ),
+      lightWorkbench: workspaceConfiguration.get<
+        Configuration["lightWorkbench"]
+      >("lightWorkbench", "material"),
+      darkSelection: workspaceConfiguration.get<Configuration["darkSelection"]>(
+        "darkSelection",
+        "grey",
+      ),
+      lightSelection: workspaceConfiguration.get<
+        Configuration["lightSelection"]
+      >("lightSelection", "grey"),
+      darkCursor: workspaceConfiguration.get<Configuration["darkCursor"]>(
+        "darkCursor",
+        "white",
+      ),
+      lightCursor: workspaceConfiguration.get<Configuration["lightCursor"]>(
+        "lightCursor",
+        "black",
+      ),
+      italicKeywords: workspaceConfiguration.get<
+        Configuration["italicKeywords"]
+      >("italicKeywords", false),
+      italicComments: workspaceConfiguration.get<
+        Configuration["italicComments"]
+      >("italicComments", true),
+      diagnosticTextBackgroundOpacity: workspaceConfiguration.get<
+        Configuration["diagnosticTextBackgroundOpacity"]
+      >("diagnosticTextBackgroundOpacity", "0%"),
+      highContrast: workspaceConfiguration.get<Configuration["highContrast"]>(
+        "highContrast",
+        false,
+      ),
     };
   } // }}}
   isDefaultConfiguration(configuration: Configuration): boolean {
@@ -61,43 +88,37 @@ export default class Utils {
   } // }}}
   getThemeData(configuration: Configuration) {
     // {{{
-    return {
-      dark: {
-        name: "Everforest Dark",
-        type: "dark",
-        semanticHighlighting: true,
-        semanticTokenColors: getSemantic(configuration, "dark"),
-        colors: getWorkbench(configuration, "dark"),
-        tokenColors: getSyntax(configuration, "dark"),
-      },
-      light: {
-        name: "Everforest Light",
-        type: "light",
-        semanticHighlighting: true,
-        semanticTokenColors: getSemantic(configuration, "light"),
-        colors: getWorkbench(configuration, "light"),
-        tokenColors: getSyntax(configuration, "light"),
-      },
-    };
+    return getThemeData(configuration);
   } // }}}
-  isNewlyInstalled(): boolean {
+  async checkIfNewlyInstalled(): Promise<boolean> {
     // {{{
     const flagPath = join(__dirname, "..", ".flag");
-    if (!fs.existsSync(flagPath)) {
-      this.writeFile(flagPath, "");
-      return true;
-    } else {
-      return false;
-    }
+    const exists = await this.hasFlagFile(flagPath);
+    return !exists;
   } // }}}
-  private async writeFile(path: string, data: unknown) {
+  async markAsInstalled(): Promise<void> {
     // {{{
-    return new Promise((resolve, reject) => {
-      fs.writeFile(path, JSON.stringify(data, null, 2), (err) =>
-        err ? reject(err) : resolve("Success"),
-      );
-    });
+    const flagPath = join(__dirname, "..", ".flag");
+    await fs.writeFile(flagPath, JSON.stringify("", null, 2));
   } // }}}
+  private async hasFlagFile(path: string): Promise<boolean> {
+    try {
+      await fs.access(path);
+      return true;
+    } catch (error) {
+      if (this.isNotFoundError(error)) {
+        return false;
+      }
+      throw error;
+    }
+  }
+  private isNotFoundError(error: unknown): error is NodeJS.ErrnoException {
+    return (
+      error instanceof Error &&
+      "code" in error &&
+      (error as NodeJS.ErrnoException).code === "ENOENT"
+    );
+  }
   private promptToReload() {
     // {{{
     const action = "Reload";
@@ -109,10 +130,14 @@ export default class Utils {
         }
       });
   } // }}}
-  async generate(darkPath: string, lightPath: string, data: any) {
+  async generate(
+    darkPath: string,
+    lightPath: string,
+    data: { dark: unknown; light: unknown },
+  ) {
     // {{{
-    this.writeFile(darkPath, data.dark).then(this.promptToReload);
-    this.writeFile(lightPath, data.light);
+    await writeThemeFiles(darkPath, lightPath, data);
+    this.promptToReload();
   } // }}}
 }
 

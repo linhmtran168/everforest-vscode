@@ -10,19 +10,47 @@
 // 3. utils.getConfiguration()
 // 4. utils.isDefaultConfiguration()
 // 5. generateThemes.ts
+export type ThemeVariant = "dark" | "light";
+export type Contrast = "soft" | "medium" | "hard";
+export type WorkbenchVariant = "material" | "flat" | "high-contrast";
+export type CursorColor =
+  | "black"
+  | "white"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "aqua"
+  | "blue"
+  | "purple";
+export type SelectionColor =
+  | "grey"
+  | "red"
+  | "orange"
+  | "yellow"
+  | "green"
+  | "aqua"
+  | "blue"
+  | "purple";
+export type DiagnosticTextBackgroundOpacity =
+  | "0%"
+  | "12.5%"
+  | "25%"
+  | "37.5%"
+  | "50%";
 export interface Configuration {
-  darkContrast?: string;
-  lightContrast?: string;
-  darkWorkbench?: string;
-  lightWorkbench?: string;
-  darkSelection?: string;
-  lightSelection?: string;
-  darkCursor?: string;
-  lightCursor?: string;
-  italicKeywords?: boolean;
-  italicComments?: boolean;
-  diagnosticTextBackgroundOpacity?: string;
-  highContrast?: boolean;
+  darkContrast: Contrast;
+  lightContrast: Contrast;
+  darkWorkbench: WorkbenchVariant;
+  lightWorkbench: WorkbenchVariant;
+  darkSelection: SelectionColor;
+  lightSelection: SelectionColor;
+  darkCursor: CursorColor;
+  lightCursor: CursorColor;
+  italicKeywords: boolean;
+  italicComments: boolean;
+  diagnosticTextBackgroundOpacity: DiagnosticTextBackgroundOpacity;
+  highContrast: boolean;
 }
 
 export interface Palette {

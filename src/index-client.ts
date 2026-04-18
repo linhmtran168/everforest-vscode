@@ -4,35 +4,53 @@
  *  License:    MIT
  *--------------------------------------------------------------*/
 
-import { workspace } from "vscode";
+import * as vscode from "vscode";
 import { join } from "path";
 import Utils from "./utils";
 
-export function activate() {
+export function activate(context: vscode.ExtensionContext) {
   const utils = new Utils();
 
   // Regenerate theme files when user configuration changes.
-  workspace.onDidChangeConfiguration((event) => {
+  const disposable = vscode.workspace.onDidChangeConfiguration((event) => {
     utils.detectConfigChanges(event, () => {
-      utils.generate(
-        join(__dirname, "..", "themes", "everforest-dark.json"),
-        join(__dirname, "..", "themes", "everforest-light.json"),
-        utils.getThemeData(utils.getConfiguration()),
-      );
+      utils
+        .generate(
+          join(__dirname, "..", "themes", "everforest-dark.json"),
+          join(__dirname, "..", "themes", "everforest-light.json"),
+          utils.getThemeData(utils.getConfiguration()),
+        )
+        .catch((error) => {
+          console.error("Failed to regenerate themes.", error);
+        });
     });
   });
+  context.subscriptions.push(disposable);
 
   // Regenerate theme files if it's newly installed but the user settings are not the default.
-  if (
-    utils.isNewlyInstalled() &&
-    !utils.isDefaultConfiguration(utils.getConfiguration())
-  ) {
-    utils.generate(
-      join(__dirname, "..", "themes", "everforest-dark.json"),
-      join(__dirname, "..", "themes", "everforest-light.json"),
-      utils.getThemeData(utils.getConfiguration()),
-    );
-  }
+  utils
+    .checkIfNewlyInstalled()
+    .then((isNewInstall) => {
+      if (!isNewInstall) {
+        return;
+      }
+      if (utils.isDefaultConfiguration(utils.getConfiguration())) {
+        return;
+      }
+      utils
+        .generate(
+          join(__dirname, "..", "themes", "everforest-dark.json"),
+          join(__dirname, "..", "themes", "everforest-light.json"),
+          utils.getThemeData(utils.getConfiguration()),
+        )
+        .then(() => utils.markAsInstalled())
+        .catch((error) => {
+          console.error("Failed to regenerate themes.", error);
+        });
+    })
+    .catch((error) => {
+      console.error("Failed to check installation status.", error);
+    });
 }
 
 export function deactivate() {}

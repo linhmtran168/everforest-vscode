@@ -173,6 +173,67 @@ export function getDefaultSyntax(palette: Palette, italicComments: boolean) {
         foreground: palette.fg,
       },
     },
+    {
+      name: "Documentation comment",
+      scope:
+        "comment.block.documentation, comment.block.javadoc, comment.block.jsdoc, string.quoted.docstring",
+      settings: {
+        foreground: palette.grey2,
+      },
+    },
+    {
+      name: "Documentation comment keyword",
+      scope:
+        "keyword.other.documentation, storage.type.class.jsdoc, entity.name.type.instance.jsdoc, variable.other.jsdoc, punctuation.definition.block.tag.jsdoc",
+      settings: {
+        foreground: palette.aqua,
+      },
+    },
+    {
+      name: "TODO/FIXME comment",
+      scope: "keyword.codetag.notation, comment.line.todo, keyword.todo",
+      settings: {
+        foreground: palette.yellow,
+        fontStyle: "bold",
+      },
+    },
+    {
+      name: "Deprecated",
+      scope: "invalid.deprecated, entity.name.tag.deprecated",
+      settings: {
+        foreground: palette.grey1,
+        fontStyle: "strikethrough",
+      },
+    },
+    {
+      name: "Error/Invalid",
+      scope: "invalid.illegal",
+      settings: {
+        foreground: palette.red,
+        fontStyle: "underline",
+      },
+    },
+    {
+      name: "Diff inserted",
+      scope: "markup.inserted, punctuation.definition.inserted",
+      settings: {
+        foreground: palette.green,
+      },
+    },
+    {
+      name: "Diff deleted",
+      scope: "markup.deleted, punctuation.definition.deleted",
+      settings: {
+        foreground: palette.red,
+      },
+    },
+    {
+      name: "Diff changed",
+      scope: "markup.changed, punctuation.definition.changed",
+      settings: {
+        foreground: palette.yellow,
+      },
+    },
     // }}}
     // Markdown{{{
     {
