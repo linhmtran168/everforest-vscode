@@ -202,7 +202,7 @@
     "compile:themes": "node dist/hook/generateThemes.js",
     "compile": "pnpm run clean && pnpm run compile:ts && pnpm run compile:themes",
     "validate:themes": "pnpm run compile && node scripts/validate-theme-output.cjs",
-    "package": "vsce package && git checkout -- themes",
+    "package": "node scripts/run-with-clean-npm-env.cjs vsce package && git checkout -- themes",
     "lint": "eslint src/",
     "browser": "vscode-test-web --browserType=chromium --extensionDevelopmentPath=. .",
     "prepare": "husky"

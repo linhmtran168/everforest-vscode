@@ -10,6 +10,8 @@ dist/hook
 .eslintignore
 .vscode-test-web
 .claude/
+.codex/
+.pnpm-store/
 CLAUDE.md
 eslint.config.mjs
 .node-version

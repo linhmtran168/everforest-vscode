@@ -6,8 +6,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 node_modules/
+.pnpm-store/
 dist/
 *.vsix
 .flag
 .vscode-test-web
 .claude/settings.local.json
+.codex/settings.local.json
