@@ -12,7 +12,16 @@ export function materialWorkbench(
   configuration: Configuration,
   variant: ThemeVariant,
 ) {
-  return baseWorkbench(palette, configuration, variant);
+  return baseWorkbench(palette, configuration, variant, {
+    "activityBar.border": `${palette.bg0}`,
+    "sideBar.border": `${palette.bg0}`,
+    "editorGroupHeader.tabsBorder": `${palette.bg0}`,
+    "tab.border": `${palette.bg0}`,
+    "panel.border": `${palette.bg0}`,
+    "statusBar.border": `${palette.bg0}`,
+    "statusBar.noFolderBorder": `${palette.bg0}`,
+    "titleBar.border": `${palette.bg0}`,
+  });
 }
 
 // vim: fdm=marker fmr={{{,}}}:

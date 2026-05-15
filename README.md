@@ -156,7 +156,7 @@ The following file types and syntax extensions are basically optimized, but ther
 
 ## Customization
 
-There are some configuration options available in this theme, you can customize the palette, contrast, workbench style, etc. via user settings.
+There are some configuration options available in this theme, you can customize the palette, contrast, workbench style, etc. via user settings. The light theme defaults to the higher-contrast `strong` foreground palette; set `everforest.lightPalette` to `pastel` for the softer official Everforest light palette.
 
 1. Click the gear button in the lower left corner.
 2. Click `Settings`.

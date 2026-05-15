@@ -64,7 +64,7 @@ export default class Utils {
       >("lightWorkbench", "material"),
       lightPalette: workspaceConfiguration.get<
         UserConfiguration["lightPalette"]
-      >("lightPalette", "pastel"),
+      >("lightPalette", "strong"),
     };
   } // }}}
   isDefaultUserConfiguration(user: UserConfiguration): boolean {
@@ -82,7 +82,7 @@ export default class Utils {
       user.lightContrast === "medium" &&
       user.darkWorkbench === "material" &&
       user.lightWorkbench === "material" &&
-      user.lightPalette === "pastel"
+      user.lightPalette === "strong"
     );
   } // }}}
   async checkIfNewlyInstalled(): Promise<boolean> {

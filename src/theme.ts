@@ -30,7 +30,7 @@ export async function writeAllThemes(
     THEME_VARIANTS.map((spec) =>
       fs.writeFile(
         join(themesDir, spec.fileName),
-        JSON.stringify(buildTheme(user, spec), null, 2),
+        `${JSON.stringify(buildTheme(user, spec), null, 2)}\n`,
       ),
     ),
   );

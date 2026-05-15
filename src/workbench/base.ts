@@ -268,6 +268,10 @@ export function baseWorkbench(
     cursorFg,
     diagnosticTextBackgroundOpacity,
   } = resolveWorkbenchConfig(palette, configuration, variant);
+  const accentForeground =
+    variant === "light" && configuration.lightPalette === "pastel"
+      ? "#21272b"
+      : palette.bg;
   const tokens: Record<string, string> = {
     foreground: `${palette.grey2}`,
     focusBorder: `${palette.bg}00`,
@@ -285,7 +289,7 @@ export function baseWorkbench(
     "toolbar.hoverBackground": `${palette.bg2}`,
     "button.background": `${palette.badge}`,
     "button.hoverBackground": `${palette.badge}d0`,
-    "button.foreground": `${palette.bg}`,
+    "button.foreground": `${accentForeground}`,
     "button.secondaryBackground": `${palette.bg3}`,
     "button.secondaryForeground": `${palette.fg}`,
     "button.secondaryHoverBackground": `${palette.bg4}`,
@@ -314,7 +318,7 @@ export function baseWorkbench(
     "scrollbarSlider.hoverBackground": `${palette.bg5}`,
     "scrollbarSlider.background": `${palette.bg5}80`,
     "badge.background": `${palette.badge}`,
-    "badge.foreground": `${palette.bg}`,
+    "badge.foreground": `${accentForeground}`,
     "progressBar.background": `${palette.badge}`,
     "list.activeSelectionForeground": `${palette.fg}`,
     "list.activeSelectionBackground": `${palette.bg4}80`,
@@ -339,7 +343,7 @@ export function baseWorkbench(
     "activityBar.activeBorder": `${palette.badge}d0`,
     "activityBar.activeFocusBorder": `${palette.badge}`,
     "activityBarBadge.background": `${palette.badge}`,
-    "activityBarBadge.foreground": `${palette.bg}`,
+    "activityBarBadge.foreground": `${accentForeground}`,
     "sideBar.foreground": `${palette.grey1}`,
     "sideBar.background": `${palette.bg}`,
     "sideBarSectionHeader.background": `${palette.bg}00`,
@@ -586,11 +590,11 @@ export function baseWorkbench(
     "notificationsErrorIcon.foreground": `${palette.red}`,
     "notificationsWarningIcon.foreground": `${palette.yellow}`,
     "notificationsInfoIcon.foreground": `${palette.blue}`,
-    "extensionButton.prominentForeground": `${palette.bg}`,
+    "extensionButton.prominentForeground": `${accentForeground}`,
     "extensionButton.prominentBackground": `${palette.badge}`,
     "extensionButton.prominentHoverBackground": `${palette.badge}d0`,
     "extensionBadge.remoteBackground": `${palette.badge}`,
-    "extensionBadge.remoteForeground": `${palette.bg}`,
+    "extensionBadge.remoteForeground": `${accentForeground}`,
     "extensionIcon.starForeground": `${palette.aqua}`,
     "extensionIcon.verifiedForeground": `${palette.green}`,
     "extensionIcon.preReleaseForeground": `${palette.orange}`,
